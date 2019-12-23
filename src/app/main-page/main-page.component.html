@@ -1,0 +1,86 @@
+<div class="container-fluid mb-5 pb-5">
+  <div class="container-fluid dark-bg">
+    <!--content-->
+    <div class="container pt-5">
+      <div class="container-fluid left-border pl-4">
+        <h1 class="display-4">Music Library</h1>
+        <div class="second-text text-muted">SONGS</div>
+      </div>
+
+      <!--folder input-->
+      <div *ngIf="!hideImport" class="container-fluid mt-5 pb-5">
+        <input
+          #folderInput
+          type="file"
+          (change)="filesPicked(folderInput.files)"
+          id="#folderInput"
+          class="btn btn-outline-dark rounded-lg"
+          webkitDirectory
+        />
+      </div>
+
+      <!--music list-->
+      <div class="container-fluid mt-5">
+        <div *ngFor="let i of musicFiles; index as ind">
+          <!--each music item-->
+          <div class="border-bottom d-flex custom-size p-4" (click)="play(ind)">
+            <div class="container-fluid ml-3">
+              <div class="music-name">{{ i.name }}</div>
+              <div class="text-muted size-text">{{ calSize(i.size) }}MB</div>
+            </div>
+            <img
+              src="https://media.giphy.com/media/JtAKTi8mis8ojIo3DR/giphy.gif"
+              class="img-fluid custom-icon-size"
+              id="{{ ind }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--music bar-->
+<div class="container-fluid showbar-pos">
+  <div class="row">
+    <div class="col-sm-4 custom-overflow font-weight-bolder pl-5 pt-2">
+      {{ currentSongName }}
+    </div>
+
+    <div class="col-sm-8">
+      <div class="container-fluid d-flex justify-content-around mt-2 mb-1">
+        <!--previous song-->
+        <div>
+          <i class="material-icons icon-size" (click)="playPrevious()">
+            fast_rewind
+          </i>
+        </div>
+
+        <!--play/pause button-->
+        <div>
+          <i
+            *ngIf="isPlaying"
+            (click)="pauseClick()"
+            class="material-icons icon-size"
+          >
+            pause_circle_filled
+          </i>
+          <i
+            *ngIf="!isPlaying"
+            (click)="playClick()"
+            class="material-icons icon-size"
+          >
+            play_circle_filled
+          </i>
+        </div>
+
+        <!--next song-->
+        <div>
+          <i class="material-icons icon-size" (click)="playNext()">
+            fast_forward
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

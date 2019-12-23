@@ -5,8 +5,8 @@ let win;
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 600, 
-    height: 670
+    width: 1366, 
+    height: 768
   })
 
   win.loadFile(`dist/angular-electron/index.html`);

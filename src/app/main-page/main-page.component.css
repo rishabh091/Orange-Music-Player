@@ -1,0 +1,38 @@
+.second-text{
+    font-size: 1.3rem;
+}
+.left-border{
+    border-left: 6px solid orange;
+}
+.music-name{
+    font-size: 1rem;
+}
+.custom-size{
+    cursor: pointer;
+    justify-content: space-between;
+}
+.custom-icon-size{
+    height: 40px;
+    width: 40px;
+    display: none;
+}
+.custom-size:hover{
+    background: #f4f4f4;
+}
+.size-text{
+    font-size: 0.9rem;
+}
+.showbar-pos{
+    background: #f2eee5;
+    position: fixed;
+    bottom: 0px;
+}
+.icon-size{
+    font-size: 3rem;
+    cursor: pointer;
+}
+.custom-overflow{
+    overflow: hidden;
+    text-overflow: clip;
+    background: orange;
+}
