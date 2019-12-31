@@ -22,6 +22,12 @@ export class MainPageComponent implements OnInit {
 
   audio;
 
+  //loading interval
+  loadingInterval;
+  loadingBar;
+  width;
+  formula;
+
   constructor() {
     this.audio = new Audio();
   }
@@ -73,7 +79,7 @@ export class MainPageComponent implements OnInit {
       this.currentSongDuration = (duration / 60).toFixed(2);
 
       //setting loading bar
-      this.loadingBar(duration);
+      this.loadingBarPlay(duration);
     });
 
     //setting icons and displaying name and audio bar
@@ -83,10 +89,10 @@ export class MainPageComponent implements OnInit {
   }
 
   //to control loading bar
-  loadingBar(duration) {
-    var loadingBar = document.getElementById("loading");
-    var width = 0;
-    var formula = 100 / duration;
+  loadingBarPlay(duration) {
+    this.loadingBar = document.getElementById("loading");
+    this.width = 0;
+    this.formula = 100 / duration;
 
     //clear all interval first
     //setTimeout(;) will gives the highest interval id and then clear all 
@@ -97,17 +103,17 @@ export class MainPageComponent implements OnInit {
     }
 
     //work untill music is played
-    var interval = this.intervalForLoading(width, formula, loadingBar);
+    this.loadingInterval = this.intervalForLoading();
   }
-  intervalForLoading(width, formula, loadingBar) {
+  intervalForLoading() {
     var interval = setInterval(() => {
-      if (width >= 100) {
+      if (this.width >= 100) {
         clearInterval(interval);
       }
 
-      width += formula;
+      this.width += this.formula;
       //setting width
-      loadingBar.style.width = width + "%";
+      this.loadingBar.style.width = this.width + "%";
     }, 1000);
 
     return interval;
@@ -117,11 +123,15 @@ export class MainPageComponent implements OnInit {
   pauseClick() {
     this.isPlaying = false;
     this.audio.pause();
+
+    clearInterval(this.loadingInterval);
   }
   //function for resuming song{
   playClick() {
     this.isPlaying = true;
     this.audio.play();
+
+    this.loadingInterval=this.intervalForLoading();
   }
   //for playing previous song
   playPrevious() {
