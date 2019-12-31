@@ -18,6 +18,7 @@ export class MainPageComponent implements OnInit {
   //current index for further use such as rewinding and forwarding
   index = 0;
   currentSongName;
+  currentSongDuration;
 
   audio;
 
@@ -29,8 +30,6 @@ export class MainPageComponent implements OnInit {
 
   filesPicked(files) {
     for (let i = 0; i < files.length; i++) {
-      let path = files[i].webkitRelativePath;
-
       //check extention if it is mp3 or not
       if (files[i].type == "audio/mp3") {
         //create url used for audio from relative path
@@ -53,7 +52,7 @@ export class MainPageComponent implements OnInit {
   //for playing the music
   play(index) {
     //will save previous song's id in localstorage and will remove playing icon
-    if (localStorage.getItem('index') != null) {
+    if (localStorage.getItem("index") != null) {
       document.getElementById(localStorage.getItem("index")).style.display =
         "none";
     }
@@ -66,10 +65,52 @@ export class MainPageComponent implements OnInit {
     this.audio.src = this.musicList[index];
     this.audio.play();
 
+    //adding a event listener because audio and video playback are asynchronous tasks and will run
+    //asynchronously therefore they can't be displayed using alert or console,
+    //used loadmetadata so that when song is loaded in memory it will get triggered and fetch me duration
+    this.audio.addEventListener("loadedmetadata", () => {
+      let duration = this.audio.duration;
+      this.currentSongDuration = (duration / 60).toFixed(2);
+
+      //setting loading bar
+      this.loadingBar(duration);
+    });
+
     //setting icons and displaying name and audio bar
-    this.currentSongName=this.musicFiles[index].name;
+    this.currentSongName = this.musicFiles[index].name;
     this.isPlaying = true;
     this.showBar = true;
+  }
+
+  //to control loading bar
+  loadingBar(duration) {
+    var loadingBar = document.getElementById("loading");
+    var width = 0;
+    var formula = 100 / duration;
+
+    //clear all interval first
+    //setTimeout(;) will gives the highest interval id and then clear all 
+    //intervals to that highest timeout
+    var highestTimeoutId = setTimeout(";");
+    for (var i = 0; i < highestTimeoutId; i++) {
+      clearTimeout(i);
+    }
+
+    //work untill music is played
+    var interval = this.intervalForLoading(width, formula, loadingBar);
+  }
+  intervalForLoading(width, formula, loadingBar) {
+    var interval = setInterval(() => {
+      if (width >= 100) {
+        clearInterval(interval);
+      }
+
+      width += formula;
+      //setting width
+      loadingBar.style.width = width + "%";
+    }, 1000);
+
+    return interval;
   }
 
   //function for pausing songs
@@ -86,20 +127,18 @@ export class MainPageComponent implements OnInit {
   playPrevious() {
     if (this.index > 0) {
       this.play(--this.index);
-    }
-    else{
-      this.index=this.musicList.length-1;
+    } else {
+      this.index = this.musicList.length - 1;
       this.play(this.index);
     }
   }
   //for playing next song
-  playNext(){
+  playNext() {
     this.index++;
-    if(this.index < this.musicList.length){
+    if (this.index < this.musicList.length) {
       this.play(this.index);
-    }
-    else{
-      this.index=0;
+    } else {
+      this.index = 0;
       this.play(this.index);
     }
   }
