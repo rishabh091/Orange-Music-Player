@@ -23,7 +23,11 @@
       <div class="container-fluid mt-5">
         <div *ngFor="let i of musicFiles; index as ind">
           <!--each music item-->
-          <div class="border-bottom d-flex custom-size p-4" (click)="play(ind)">
+          <div
+            class="border-bottom d-flex custom-size p-4"
+            (click)="play(ind)"
+            [id]="i.name"
+          >
             <div class="container-fluid ml-3">
               <div class="music-name">{{ i.name }}</div>
               <div class="text-muted size-text">{{ calSize(i.size) }}MB</div>
@@ -41,15 +45,24 @@
 </div>
 
 <!--music bar-->
-<div class="container-fluid showbar-pos">
+<div *ngIf="showBar" class="container-fluid showbar-pos">
   <!--loading  bar-->
   <div class="container-fluid loading-height">
-    <div class="container-fluid loading-height loading-color" id="loading"></div>
+    <div
+      class="container-fluid loading-height loading-color"
+      id="loading"
+    ></div>
   </div>
   <!--naming and controls-->
   <div class="row">
-    <div class="col-sm-4 custom-overflow font-weight-bolder pl-5 pt-2 text-light">
-      {{ currentSongName }}
+    <div class="col-sm-4 custom-overflow ">
+      <a href="#{{ currentSongName }}">
+        <div
+          class="font-weight-bolder pl-5 pt-2 text-light"
+        >
+          {{ currentSongName }}
+        </div>
+      </a>
     </div>
 
     <div class="col-sm-8">

@@ -109,6 +109,10 @@ export class MainPageComponent implements OnInit {
     var interval = setInterval(() => {
       if (this.width >= 100) {
         clearInterval(interval);
+        
+        if(this.audio.ended){
+          this.playNext();
+        }
       }
 
       this.width += this.formula;
