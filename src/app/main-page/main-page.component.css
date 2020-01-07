@@ -42,3 +42,13 @@
 .loading-color{
     background: orange;
 }
+#loading{
+    width: 0%;
+}
+a{
+    color: white;
+}
+a:hover{
+    text-decoration: none;
+    color: orange;
+}
