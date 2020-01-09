@@ -28,6 +28,9 @@ export class MainPageComponent implements OnInit {
   width;
   formula;
 
+  //playlist
+  playlist = [];
+
   constructor() {
     this.audio = new Audio();
   }
@@ -95,7 +98,7 @@ export class MainPageComponent implements OnInit {
     this.formula = 100 / duration;
 
     //clear all interval first
-    //setTimeout(;) will gives the highest interval id and then clear all 
+    //setTimeout(;) will gives the highest interval id and then clear all
     //intervals to that highest timeout
     var highestTimeoutId = setTimeout(";");
     for (var i = 0; i < highestTimeoutId; i++) {
@@ -109,9 +112,17 @@ export class MainPageComponent implements OnInit {
     var interval = setInterval(() => {
       if (this.width >= 100) {
         clearInterval(interval);
-        
-        if(this.audio.ended){
-          this.playNext();
+
+        //if audio is ended switch to next one
+        if (this.audio.ended) {
+          //check whether the playlist is made or not
+          //if the playlist is empty then play next, if playlist is not empty then get index of playlist
+          //and play that music
+          if (this.playlist.length == 0) {
+            this.playNext();
+          } else {
+            this.play(this.playlist.shift());
+          }
         }
       }
 
@@ -135,7 +146,7 @@ export class MainPageComponent implements OnInit {
     this.isPlaying = true;
     this.audio.play();
 
-    this.loadingInterval=this.intervalForLoading();
+    this.loadingInterval = this.intervalForLoading();
   }
   //for playing previous song
   playPrevious() {
@@ -155,5 +166,17 @@ export class MainPageComponent implements OnInit {
       this.index = 0;
       this.play(this.index);
     }
+  }
+
+  //for adding in playlist
+  addToPlaylist(index) {
+    this.playlist.push(index);
+    console.log(this.playlist);
+  }
+
+  //for adding in front of queue
+  playNextFromPlaylist(index) {
+    this.playlist.unshift(index);
+    console.log(this.playlist);
   }
 }

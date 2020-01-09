@@ -22,21 +22,38 @@
       <!--music list-->
       <div class="container-fluid mt-5">
         <div *ngFor="let i of musicFiles; index as ind">
-          <!--each music item-->
-          <div
-            class="border-bottom d-flex custom-size p-4"
-            (click)="play(ind)"
-            [id]="i.name"
-          >
-            <div class="container-fluid ml-3">
-              <div class="music-name">{{ i.name }}</div>
-              <div class="text-muted size-text">{{ calSize(i.size) }}MB</div>
+          <div class="row border-bottom custom-size">
+            <!--each music item-->
+            <div
+              class="d-flex p-4 col-sm-10"
+              (click)="play(ind)"
+              [id]="i.name"
+            >
+              <div class="container-fluid ml-3">
+                <div class="music-name">{{ i.name }}</div>
+                <div class="text-muted size-text">{{ calSize(i.size) }}MB</div>
+              </div>
+              <img
+                src="https://media.giphy.com/media/JtAKTi8mis8ojIo3DR/giphy.gif"
+                class="img-fluid custom-icon-size"
+                id="{{ ind }}"
+              />
             </div>
-            <img
-              src="https://media.giphy.com/media/JtAKTi8mis8ojIo3DR/giphy.gif"
-              class="img-fluid custom-icon-size"
-              id="{{ ind }}"
-            />
+
+            <div class="dropdown col-sm-2 p-4">
+              <div
+                class="text-right"
+                data-toggle="dropdown"
+              >
+                <i class="material-icons right-button p-1 rounded-circle">
+                  more_vert
+                </i>
+              </div>
+              <div class="dropdown-menu">
+                <div class="dropdown-item" (click)="addToPlaylist(ind)">Add to Playlist</div>
+                <div class="dropdown-item" (click)="playNextFromPlaylist(ind)">Play Next</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
