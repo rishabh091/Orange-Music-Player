@@ -23,12 +23,15 @@
       <div class="container-fluid mt-5">
         <div *ngFor="let i of musicFiles; index as ind">
           <div class="row border-bottom custom-size">
+            <!--album art-->
+            <div class="col-sm-2">
+              <img
+                src="https://peelander-z.com/wp-content/themes/soundcheck/images/default-album-artwork.png"
+                class="img-fluid"
+              />
+            </div>
             <!--each music item-->
-            <div
-              class="d-flex p-4 col-sm-10"
-              (click)="play(ind)"
-              [id]="i.name"
-            >
+            <div class="d-flex p-4 col-sm-8" (click)="play(ind)" [id]="i.name">
               <div class="container-fluid ml-3">
                 <div class="music-name">{{ i.name }}</div>
                 <div class="text-muted size-text">{{ calSize(i.size) }}MB</div>
@@ -41,17 +44,18 @@
             </div>
 
             <div class="dropdown col-sm-2 p-4">
-              <div
-                class="text-right"
-                data-toggle="dropdown"
-              >
+              <div class="text-right" data-toggle="dropdown">
                 <i class="material-icons right-button p-1 rounded-circle">
                   more_vert
                 </i>
               </div>
               <div class="dropdown-menu">
-                <div class="dropdown-item" (click)="addToPlaylist(ind)">Add to Playlist</div>
-                <div class="dropdown-item" (click)="playNextFromPlaylist(ind)">Play Next</div>
+                <div class="dropdown-item" (click)="addToPlaylist(ind)">
+                  Add to Playlist
+                </div>
+                <div class="dropdown-item" (click)="playNextFromPlaylist(ind)">
+                  Play Next
+                </div>
               </div>
             </div>
           </div>
@@ -62,7 +66,12 @@
 </div>
 
 <!--music bar-->
-<div *ngIf="showBar" class="container-fluid showbar-pos">
+<div
+  *ngIf="showBar"
+  class="container-fluid showbar-pos"
+  data-toggle="modal"
+  data-target="#myModal"
+>
   <!--loading  bar-->
   <div class="container-fluid loading-height">
     <div
@@ -72,7 +81,7 @@
   </div>
   <!--naming and controls-->
   <div class="row">
-    <div class="col-sm-4 custom-overflow ">
+    <div class="col-sm-4 custom-overflow">
       <div class="font-weight-bolder pl-5 pt-2">
         <a href="#{{ currentSongName }}">{{ currentSongName }}</a>
       </div>
@@ -110,6 +119,56 @@
           <i class="material-icons icon-size" (click)="playNext()">
             fast_forward
           </i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--modal for playback-->
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container text-right">
+          <div class="dropdown dropleft">
+            <button
+              type="button"
+              class="btn btn-info rounded-0"
+              data-toggle="dropdown"
+            >
+              Show Playlist
+            </button>
+            <div class="dropdown-menu request-dropdown p-2">
+              <div *ngIf="playlist.length == 0" class="text-muted text-center">
+                No songs added
+              </div>
+              <div *ngFor="let i of playlist">
+                <div class="p-3 playlist-songs" (click)="play(i)">
+                  {{ musicFiles[i].name }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--music name and album art-->
+        <div class="container text-center">
+          <img
+            src="https://peelander-z.com/wp-content/themes/soundcheck/images/default-album-artwork.png"
+            class="img-fluid shadow"
+          />
+
+          <h1 class="display-4 mt-5 mb-5">{{ currentSongName }}</h1>
         </div>
       </div>
     </div>
