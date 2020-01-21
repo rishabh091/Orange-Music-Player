@@ -143,7 +143,8 @@
           <div class="dropdown dropleft">
             <button
               type="button"
-              class="btn btn-info rounded-0"
+              class="btn btn-outline-dark"
+              style="border-radius: 2rem;"
               data-toggle="dropdown"
             >
               Show Playlist
@@ -169,6 +170,42 @@
           />
 
           <h1 class="display-4 mt-5 mb-5">{{ currentSongName }}</h1>
+        </div>
+
+        <!--music control-->
+        <div class="d-flex justify-content-around">
+
+          <!--previous song-->
+          <div>
+            <i class="material-icons icon-size-2" (click)="playPrevious()">
+              fast_rewind
+            </i>
+          </div>
+
+          <!--play pause button-->
+          <div>
+            <i
+              *ngIf="isPlaying"
+              (click)="pauseClick()"
+              class="material-icons icon-size-2"
+            >
+              pause_circle_filled
+            </i>
+            <i
+              *ngIf="!isPlaying"
+              (click)="playClick()"
+              class="material-icons icon-size-2"
+            >
+              play_circle_filled
+            </i>
+          </div>
+
+          <!--next song-->
+          <div>
+            <i class="material-icons icon-size-2" (click)="playNext()">
+              fast_forward
+            </i>
+          </div>
         </div>
       </div>
     </div>

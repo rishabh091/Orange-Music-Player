@@ -29,7 +29,7 @@ export class MainPageComponent implements OnInit {
   formula;
 
   //playlist
-  playlist = [];
+  playlist: number[] = [];
 
   constructor() {
     this.audio = new Audio();
@@ -40,7 +40,7 @@ export class MainPageComponent implements OnInit {
   filesPicked(files) {
     for (let i = 0; i < files.length; i++) {
       //check extention if it is mp3 or not
-      if (files[i].type == "audio/mp3") {
+      if (files[i].type == "audio/mp3" || files[i].type == "audio/mpeg") {
         //create url used for audio from relative path
         const url = URL.createObjectURL(files[i]);
 
@@ -178,5 +178,16 @@ export class MainPageComponent implements OnInit {
   playNextFromPlaylist(index) {
     this.playlist.unshift(index);
     console.log(this.playlist);
+  }
+
+  //getIndex
+  getIndex(arr,data){
+    for(let i=0;i<arr.length;i++){
+      if(data == arr[i]){
+        return i;
+      }
+    }
+
+    return -1;
   }
 }

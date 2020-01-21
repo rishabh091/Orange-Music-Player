@@ -59,6 +59,10 @@ a:hover{
     background: orange;
 }
 .modal{
-    background: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
+    background: url('https://images.unsplash.com/photo-1513829596324-4bb2800c5efb?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
     background-size: cover; 
+}
+.icon-size-2{
+    font-size: 6rem;
+    cursor: pointer;
 }
