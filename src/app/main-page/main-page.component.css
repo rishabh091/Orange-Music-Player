@@ -66,3 +66,7 @@ a:hover{
     font-size: 6rem;
     cursor: pointer;
 }
+.music-options:hover{
+    background: #3a3535;
+    color: white;
+}

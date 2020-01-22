@@ -49,5 +49,16 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.15.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rishabh091/Orange-Music-Player.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rishabh091/Orange-Music-Player/issues"
+  },
+  "homepage": "https://github.com/rishabh091/Orange-Music-Player#readme"
 }
