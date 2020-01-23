@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 
 @Component({
   selector: 'app-front-page',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrontPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
+  
+   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.router.navigate(['home']);
+  }, 3000);
   }
 
 }
