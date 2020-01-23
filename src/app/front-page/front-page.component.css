@@ -1,0 +1,24 @@
+.back
+{
+    height: 950px ;
+    width: 100%;
+    background-image: linear-gradient(#ffd369,#ff971d);
+    overflow-x: hidden;
+}
+
+.cont
+{
+    padding-top: 300px; 
+    padding-left: 150px; 
+}
+.text
+{
+    padding-left: 60px;
+    color: white;
+    font-size: 200px; 
+}
+.img
+{
+    height: 300px;
+    width: 300px;
+}
