@@ -1,24 +1,23 @@
-.back
-{
-    height: 950px ;
+.back{
+    height: 100vh;
     width: 100%;
     background-image: linear-gradient(#ffd369,#ff971d);
-    overflow-x: hidden;
 }
-
-.cont
-{
-    padding-top: 300px; 
-    padding-left: 150px; 
+.orange{
+    height: 20vh;
+    width: 20vh;
 }
-.text
-{
-    padding-left: 60px;
+.text{
+    align-items: center;
+    font-size: 5rem;
+    font-weight: bold;
     color: white;
-    font-size: 200px; 
+    letter-spacing: 0.7rem;
+    padding-left: 0.7rem;
+    text-shadow: 0px 0px 7px #d1cebd; 
 }
-.img
-{
-    height: 300px;
-    width: 300px;
+.both{
+    align-items: center;
+    height: 100vh;
+    width: 100%;
 }
